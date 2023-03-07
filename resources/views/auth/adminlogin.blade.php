@@ -6,15 +6,15 @@
       <div class="row w-100 mx-0 ">
         <div class="col-lg-4 mx-auto shadow">
           <div class="auth-form-light text-left py-5 px-4 px-sm-5">
-            <div class="brand-logo">
-              <img src="../../assets/images/logo.svg" alt="logo">
+            <div class="brand-logo text-center">
+              <img src="../../assets/images/logongadu.png" style="width: 100px;" alt="logo">
             </div>
             <h4>Selamat Datang!</h4>
             <h6 class="font-weight-light">Masuk Untuk Melanjukan</h6>
             <form method="POST" action="{{ route('admin.login') }}">
                 @csrf
                 <div class="form-group">
-                    <input style="border-radius: 10px" id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                    <input style="border-radius: 10px" id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus placeholder="email">
 
                     @error('email')
                         <span class="invalid-feedback" role="alert">
@@ -24,7 +24,7 @@
                 </div>
 
                 <div class="form-group">
-                    <input style="border-radius: 10px" id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+                    <input style="border-radius: 10px" id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password" placeholder="password">
 
                     @error('password')
                         <span class="invalid-feedback" role="alert">

@@ -2,12 +2,12 @@
 
 @section('content')  
 
-<div class="container" style="margin-top: -400px">
+<div class="container" >
   <div class="d-flex justify-content-center  flex-column">
     <div class="card mt-5 p-2 ms-auto me-auto" style="width: 45rem; border-radius: 20px; box-shadow: 0px 5px 30px #3C4048;">
       <div class="card-body">
         <h5 class="card-title text-center" style="color: #6096B4;">Masukkan Pengaduan Mu</h5>
-        <form action="" class="mt-4" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('user.store') }}" class="mt-4" method="POST" enctype="multipart/form-data">
           @csrf
           <div class="container">
             <div class="row">

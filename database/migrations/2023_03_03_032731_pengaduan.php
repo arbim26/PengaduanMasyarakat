@@ -13,19 +13,16 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('pengaduan', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
-            $table->char('nik', 16)->unique();
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->rememberToken();
+            $table->date('tgl_pengaduan');
+            $table->unsignedInteger('user_id')->unsigned;
+            $table->text('isi_laporan');
+            $table->string('foto');
+            $table->enum('status',['report', 'proses', 'selesai']);
             $table->timestamps();
-        });
 
-        Schema::table('users', function (Blueprint $table) {
-           
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
@@ -36,7 +33,7 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        chema::dropIfExists('pengaduan');
     }
 };
 ?>

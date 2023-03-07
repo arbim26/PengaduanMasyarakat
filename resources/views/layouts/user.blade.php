@@ -16,10 +16,12 @@
     <title>Laporan</title>
   </head>
   <body>
-    <nav class="navbar fixed-top navbar-expand-lg navbar-dark">
+    <nav class="navbar fixed-top  navbar-expand-lg navbar-dark">
       <div class="container">
-        <a class="navbar-brand" href="#">Navbar</a>
-
+        <a class="navbar-brand" href="/">
+          <img src="../assets/images/logongadulight.png" alt="" width="75">
+        </a>
+    
         @guest
         <div class="d-flex gap-3">
             <a class="btn" href="{{ route('login') }}" style="background-color: white; color: #6096B4; font-weight: 500;" type="submit">Masuk</a> 
@@ -45,17 +47,31 @@
     <div class="waves">
       <div class="header" style="color: white; text-align: center; padding-top: 100px">
         <h3>Layanan Pengaduan Online Rakyat</h3>
-        <p>Kami Siap Menerima Semua Keluhan Anda</p>
+        <p>@auth("web") Selamat Datang {{Auth::guard('web')->user()->name}}! , @endauth Kami Siap Menerima Semua Keluhan Anda</p>
       </div>
       <div class="wave wave1"></div>
       <div class="wave wave2"></div>
       <div class="wave wave3"></div>
+      @yield('content')
     </div>
-    @yield('content')
 
 
     <!-- Optional JavaScript; choose one of the two! -->
     @yield('js')
+
+    <script>
+      $(document).ready(function() {
+              // Transition effect for navbar 
+              $(window).scroll(function() {
+                // checks if window is scrolled more than 500px, adds/removes solid class
+                if($(this).scrollTop() > 500) { 
+                    $('.navbar').addClass('solid');
+                } else {
+                    $('.navbar').removeClass('solid');
+                }
+              });
+      });
+    </script>
     <!-- Option 1: Bootstrap Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 

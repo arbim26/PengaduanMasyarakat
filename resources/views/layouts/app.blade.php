@@ -24,11 +24,15 @@
 </head>
 <body>
   <div class="container-scroller">
+    {{-- {{ 
+      $auth = Auth::guard('admin')->user()->role;
+      dd($auth = 1);
+     }} --}}
     <!-- partial:partials/_navbar.html -->
     <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
       <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-        <a class="navbar-brand brand-logo mr-5" href="index.html"><img src="../assets/images/logo.svg" class="mr-2" alt="logo"/></a>
-        <a class="navbar-brand brand-logo-mini" href="index.html"><img src="../assets/images/logo-mini.svg" alt="logo"/></a>
+        <a class="navbar-brand brand-logo mr-5" href="index.html"><img src="../assets/images/ngadu-logo.png" class="mr-2" alt="logo"/></a>
+        <a class="navbar-brand brand-logo-mini" href="index.html"><img src="../assets/images/logongadu.png" alt="logo"/></a>
       </div>
       <div class="navbar-menu-wrapper d-flex align-items-center justify-content-start">
         <button class="navbar-toggler align-self-center" type="button" data-toggle="minimize">
@@ -53,17 +57,25 @@
       <nav class="sidebar sidebar-offcanvas" id="sidebar">
         <ul class="nav">
           <li class="nav-item">
-            <a class="nav-link" href="/">
+            <a class="nav-link" href="/admin/dashboard">
               <i class="icon-grid menu-icon"></i>
               <span class="menu-title">Dashboard</span>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="">
+            <a class="nav-link" href="{{route('pengaduan.index')}}">
               <i class="icon-grid menu-icon"></i>
               <span class="menu-title">Pengaduan</span>
             </a>
           </li>
+          @if ($auth = Auth::guard('admin')->user()->role == 1)              
+          <li class="nav-item">
+            <a class="nav-link" href="">
+              <i class="icon-grid menu-icon"></i>
+              <span class="menu-title">User</span>
+            </a>
+          </li>
+          @endif
         </ul>
       </nav>
       <div class="main-panel">
