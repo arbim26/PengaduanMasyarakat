@@ -48,6 +48,7 @@ class LoginController extends Controller
 
     public function adminLogin(Request $request)
     {
+        // dd(Auth::guard('admin')->attempt((['email' => $request->email, 'password' => $request->password])));
         $this->validate($request, [
             'email'   => 'required|email',
             'password' => 'required|min:6'

@@ -14,12 +14,18 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 
 class UserController extends Controller
 {
+    public function riwayat()
+    {
+        $user = User::find(Auth::user()->id);
+        $data = Pengaduan::where('user_id', $user->id)->paginate(3);
+        return view('riwayat',['user' => $user], compact('data'));
+    }
+
     public function store(request $request)
     {
-        // dd(Auth::guard('web')->user());
-        // if (Auth::guard('web')) {
-        //     return redirect()->route('login')->with(['success' => 'Anda harus logon terlebih dahulu']);
-        // } else {
+        if (!Auth::guard('web')->user()) {
+            return redirect()->route('login')->with(['error' => 'Anda harus logon terlebih dahulu']);
+        } else {
             $this->validate($request, [
                 'laporan'   => 'required',
                 'image'     => 'required|image|mimes:png,jpg,jpeg',
@@ -40,13 +46,11 @@ class UserController extends Controller
             ]);
     
             if($data){
-                //redirect dengan pesan sukses
-                return redirect()->route('user')->with(['success' => 'Data Berhasil Disimpan!']);
+                return redirect()->route('riwayat')->with(['success' => 'Pengaduan Berhasil Disimpan!']);
             }else{
-                //redirect dengan pesan error
-                return redirect()->route('user')->with(['error' => 'Data Gagal Disimpan!']);
+                return redirect()->route('riwayat')->with(['error' => 'Pengaduan Gagal Disimpan!']);
             }   
         }
     }
-// }
+}
 ?>

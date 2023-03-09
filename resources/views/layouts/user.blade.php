@@ -11,6 +11,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+
     <link rel="stylesheet" href="../../assets/css/masyrakat.css">
 
     <title>Laporan</title>
@@ -24,20 +26,23 @@
     
         @guest
         <div class="d-flex gap-3">
-            <a class="btn" href="{{ route('login') }}" style="background-color: white; color: #6096B4; font-weight: 500;" type="submit">Masuk</a> 
-            <a class="btn" href="{{ route('register') }}" style="background-color: white; color: #6096B4; font-weight: 500;" type="submit">Daftar</a> 
+            <a class="btn" href="{{ route('login') }}" style="background-color: white; color: #6096B4; font-weight: 500; font-size: 14px" type="submit">Masuk</a> 
+            <a class="btn" href="{{ route('register') }}" style="background-color: white; color: #6096B4; font-weight: 500; font-size: 14px" type="submit">Daftar</a> 
         </div>
         @endguest
 
 
-        @auth("web")            
-        <a class="btn" href="{{ route('logout') }}" style="background-color: white; color: #6096B4; font-weight: 500;"
-        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-         Logout
-        </a>
-        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-            @csrf
-        </form>
+        @auth("web")   
+        <div class="d-flex gap-3">
+          <a class="btn" href="{{ route('riwayat') }}" style="background-color: white; color: #6096B4; font-weight: 500; font-size: 14px" type="submit"><i class="bi bi-clock-history me-1"></i>Riwayat Pengaduan</a>
+          <a class="btn" href="{{ route('logout') }}" style="background-color: white; color: #6096B4; font-weight: 500; font-size: 14px"
+          onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+          <i class="bi bi-box-arrow-in-right me-1"></i>Logout
+          </a>
+          <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+              @csrf
+          </form>
+        </div>         
         @endauth
 
 
@@ -45,15 +50,26 @@
       </div>
     </nav>
     <div class="waves">
-      <div class="header" style="color: white; text-align: center; padding-top: 100px">
+      <div class="header" style="color: white; text-align: center; padding-top: 125px">
         <h3>Layanan Pengaduan Online Rakyat</h3>
-        <p>@auth("web") Selamat Datang {{Auth::guard('web')->user()->name}}! , @endauth Kami Siap Menerima Semua Keluhan Anda</p>
+        <p><strong>@auth("web") Selamat Datang {{Auth::guard('web')->user()->name}}! , @endauth</strong> Kami Siap Menerima Semua Keluhan Anda</p>
       </div>
       <div class="wave wave1"></div>
       <div class="wave wave2"></div>
       <div class="wave wave3"></div>
       @yield('content')
+
+      <div class="container" style="width: 600px; color: #6096B4">
+        <h4 class="text-center">Tentang Ngadu</h4>
+        <p class="mt-4" style="text-align: justify; color: #6096B4">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Scelerisque purus semper eget duis at tellus. Quis enim lobortis scelerisque fermentum dui faucibus in ornare quam. Sed sed risus pretium quam vulputate dignissim suspendisse in. Quisque non tellus orci ac auctor augue mauris. Aliquet risus feugiat in ante metus dictum at. Urna molestie at elementum eu facilisis sed odio morbi quis. Amet nisl suscipit adipiscing bibendum est ultricies integer. Sed risus pretium quam vulputate dignissim suspendisse. Sit amet consectetur adipiscing elit pellentesque.</p>
+      </div>
     </div>
+
+    <footer class="bg-light text-center text-lg-start mt-5">
+      <div class="text-center p-3" >
+        <p style="font-size: 12px; color: grey">© 2023 Copyright: Arbim</p>
+      </div>
+    </footer>
 
 
     <!-- Optional JavaScript; choose one of the two! -->

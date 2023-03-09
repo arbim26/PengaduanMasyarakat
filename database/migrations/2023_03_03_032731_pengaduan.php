@@ -19,7 +19,7 @@ return new class extends Migration
             $table->unsignedInteger('user_id')->unsigned;
             $table->text('isi_laporan');
             $table->string('foto');
-            $table->enum('status',['report', 'proses', 'selesai']);
+            $table->enum('status',['menunggu verifikasi', 'proses', 'selesai']);
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

@@ -3,10 +3,16 @@
 @section('content')
 <div class="container" >
     <div class="d-flex justify-content-center  flex-column">
-      <div class="card mt-5 p-2 ms-auto me-auto ps-5 pe-5" style="width: 30rem; border-radius: 20px; box-shadow: 0px 5px 30px #3C4048;">
+      <div class="card mt-5 p-2 ms-auto me-auto ps-5 pe-5" style="margin-bottom: 100px; width: 30rem; border-radius: 20px; box-shadow: 0px 5px 30px #3C4048;">
         <div class="card-body">
           <h5 class="card-title text-center" style="color: #6096B4;">Selamat Datang Kembali !</h5>
           <p class="text-secondary text-center small" >Masuk Untuk Melanjutkan</p>
+          @if ($message = Session::get('error'))
+          <div class="alert alert-danger alert-dismissible fade show">
+            <p>Anda Harus Login Terlebih Dahulu</p>
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+          @endif
           <form method="POST" action="{{ route('login') }}" class="mt-4">
             @csrf
 

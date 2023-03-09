@@ -1,9 +1,17 @@
 @extends('layouts.app')
 
 @section('content')
-@foreach ( $data as $row )    
-<div class="card profile shadow">
-  <div class="card-body my-4">
+@foreach ( $data as $row ) 
+@if ($message = Session::get('success'))    
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+  Data berhasil di verifikasi
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+@endif   
+<div class="card profile shadow mb-5">
+  <div class="card-body">
     <div class="row align-items-center">
       <div class="col-md-3 text-center mb-5">
           <img src="{{ Storage::url('foto/').$row->foto }}" class="img-thumbnail" width=
@@ -16,7 +24,7 @@
             <h4 class="mb-1">{{$row->user->name}}</h4>
             <div class="d-flex" style="gap: 10px">
               <div>
-                <label class="badge badge-warning">{{ $row->status }}</label>
+                <label class="badge <?php if ($row->status == 'menunggu verifikasi'){ ?> badge-info <?php   } ?> <?php if ($row->status == 'proses'){ ?> badge-warning <?php   } ?>  <?php if ($row->status == 'selesai'){ ?> badge-success <?php   } ?> ">{{ $row->status }}</label>
               </div>
               <div>
                 <span class="small text-muted mb-0">{{$row->tgl_pengaduan}}</span>
@@ -26,9 +34,9 @@
           <div class="col-md-6">
           </div>
         </div>
-        <div class="row mb-4">
+        <div class="row mb-2">
           <div class="col-md-6">
-            <p class="text-muted">{{ Str::limit($row->isi_laporan,175) }}</p>
+            <p class="text-muted m-0">{{ Str::limit($row->isi_laporan,175) }}</p>
           </div>
           <div class="col-md-6">
             <p class="small mb-0 text-muted">Nec Urna Suscipit Ltd</p>
@@ -38,15 +46,73 @@
         </div>
         <div class="row align-items-center">
           <div class="col mb-2">
-            
-            @if ($row->status == "proses")
-            <form action="/updatemapel/{{$row->id}}" method="POST">
+            @if ($row->status == "menunggu verifikasi")
+            <form class="btn p-0" action="/verifikasi/{{$row->id}}" method="POST">
+              @method('PUT')
+              @csrf
               <button type="submit" class="btn btn-primary">Verifikasi</button>
             </form>
-            @else
-            <button type="button" class="btn btn-primary">Tanggapi</button>   
             @endif
-            <button type="button" class="btn btn-secondary">Detail</button>
+
+            @if ($row->status == "proses")
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+              Tanggapi
+            </button>
+            @endif
+
+            <!-- Button trigger modal -->
+             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal{{$row->id}}">
+               Detail
+             </button>
+             
+             <!-- Modal -->
+             <form action="/tanggapan/{{$row->id}}" method="POST">
+              @csrf
+               <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                 <div class="modal-dialog">
+                   <div class="modal-content">
+                     <div class="modal-header" style="border: none">
+                       <h5 class="modal-title" id="exampleModalLabel">Isi Tanggapan</h5>
+                       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                         <span aria-hidden="true">&times;</span>
+                       </button>
+                     </div>
+                     <div class="modal-body" style="border: none">
+                      <div class="form-group">
+                        <textarea name="tanggapan" class="form-control" id="exampleFormControlTextarea1" rows="10"></textarea>
+                      </div>                  
+                     </div>
+                     <div class="modal-footer" style="border: none">
+                       <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                       <button type="submit" class="btn btn-primary">Simpan</button>
+                     </div>
+                   </div>
+                 </div>
+               </div>
+             </form>
+             <!-- Modal -->
+             <div class="modal fade" id="exampleModal{{$row->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+               <div class="modal-dialog">
+                 <div class="modal-content">
+                   <div class="modal-header">
+                     <h5 class="modal-title" id="exampleModalLabel">Detail</h5>
+                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                       <span aria-hidden="true">&times;</span>
+                     </button>
+                   </div>
+                   <div class="modal-body">
+                    <h6>Isi Laporan :</h6>
+                    <p>{{$row->isi_laporan}}</p>
+                    <h6>Isi Tanggapan :</h6>
+                    <p>{{$data2->tanggapan}}</p>
+                   </div>
+                   <div class="modal-footer">
+                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                     <button type="button" class="btn btn-primary">Save changes</button>
+                   </div>
+                 </div>
+               </div>
+             </div>
           </div>
         </div>
       </div>
