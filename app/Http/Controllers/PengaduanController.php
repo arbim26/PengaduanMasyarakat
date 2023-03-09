@@ -19,9 +19,8 @@ class PengaduanController extends Controller
      */
     public function index()
     {
-        $data = Pengaduan::get();
-        $data2 = Tanggapan::get();
-        return view('admin.pengaduan.index', compact('data','data2'));
+        $data = Pengaduan::latest()->get();
+        return view('admin.pengaduan.index', compact('data'));
     }
 
     public function verifikasi($id)
@@ -33,6 +32,7 @@ class PengaduanController extends Controller
 
     public function tanggapan(request $request, $id)
     {
+        // dd($id);
         $this->validate($request, [
             'tanggapan'   => 'required',
         ]);

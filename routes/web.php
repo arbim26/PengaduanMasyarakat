@@ -39,5 +39,5 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/admin/dashboard',function(){ return view('admin.admin'); })->middleware('auth:admin');
 Route::resource('pengaduan', PengaduanController::class)->middleware('auth:admin');
 Route::put('/verifikasi/{id}', [PengaduanController::class, 'verifikasi'])->middleware('auth:admin');
-Route::post('/tanggapan/{id}', [PengaduanController::class, 'tanggapan'])->middleware('auth:admin');
+Route::put('/tanggapan/{id}', [PengaduanController::class, 'tanggapan'])->middleware('auth:admin');
 ?>

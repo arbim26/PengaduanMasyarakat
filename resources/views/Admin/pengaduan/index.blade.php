@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-@foreach ( $data as $row ) 
 @if ($message = Session::get('success'))    
 <div class="alert alert-success alert-dismissible fade show" role="alert">
   Data berhasil di verifikasi
@@ -10,6 +9,7 @@
   </button>
 </div>
 @endif   
+@foreach ( $data as $row ) 
 <div class="card profile shadow mb-5">
   <div class="card-body">
     <div class="row align-items-center">
@@ -24,7 +24,7 @@
             <h4 class="mb-1">{{$row->user->name}}</h4>
             <div class="d-flex" style="gap: 10px">
               <div>
-                <label class="badge <?php if ($row->status == 'menunggu verifikasi'){ ?> badge-info <?php   } ?> <?php if ($row->status == 'proses'){ ?> badge-warning <?php   } ?>  <?php if ($row->status == 'selesai'){ ?> badge-success <?php   } ?> ">{{ $row->status }}</label>
+                <label class="badge <?php if  ($row->status == 'menunggu verifikasi'){ ?> badge-info <?php   } ?> <?php if ($row->status == 'proses'){ ?> badge-warning <?php   } ?>  <?php if ($row->status == 'selesai'){ ?> badge-success <?php   } ?> ">{{ $row->status }}</label>
               </div>
               <div>
                 <span class="small text-muted mb-0">{{$row->tgl_pengaduan}}</span>
@@ -38,11 +38,15 @@
           <div class="col-md-6">
             <p class="text-muted m-0">{{ Str::limit($row->isi_laporan,175) }}</p>
           </div>
+          @if ($row->tanggapan)
           <div class="col-md-6">
-            <p class="small mb-0 text-muted">Nec Urna Suscipit Ltd</p>
-            <p class="small mb-0 text-muted">P.O. Box 464, 5975 Eget Avenue</p>
-            <p class="small mb-0 text-muted">(537) 315-1481</p>
+            <p class="small mb-0 text-muted">{{Str::limit($row->tanggapan->tanggapan,175)}}</p>
           </div>
+          @else
+          <div class="alert alert-danger" role="alert">
+            Belum Di Tanggapi
+          </div>
+          @endif
         </div>
         <div class="row align-items-center">
           <div class="col mb-2">
@@ -55,7 +59,7 @@
             @endif
 
             @if ($row->status == "proses")
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModals{{$row->id}}">
               Tanggapi
             </button>
             @endif
@@ -66,9 +70,11 @@
              </button>
              
              <!-- Modal -->
-             <form action="/tanggapan/{{$row->id}}" method="POST">
+             <form action="/tanggapan/{{$row->id}}"  method="POST">
+              {{-- {{dd($row->id)}} --}}
+              @method("PUT")
               @csrf
-               <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+               <div class="modal fade" id="exampleModals{{$row->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                  <div class="modal-dialog">
                    <div class="modal-content">
                      <div class="modal-header" style="border: none">
@@ -102,13 +108,16 @@
                    </div>
                    <div class="modal-body">
                     <h6>Isi Laporan :</h6>
+                    <p>{{$row->id}}</p>
                     <p>{{$row->isi_laporan}}</p>
                     <h6>Isi Tanggapan :</h6>
-                    <p>{{$data2->tanggapan}}</p>
-                   </div>
-                   <div class="modal-footer">
-                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                     <button type="button" class="btn btn-primary">Save changes</button>
+                    @if ($row->tanggapan)
+                    <p class="small mb-0 text-muted">{{Str::limit($row->tanggapan->tanggapan,175)}}</p>
+                    @else
+                    <div class="alert alert-danger" role="alert">
+                      Belum Di Tanggapi
+                    </div>
+                    @endif
                    </div>
                  </div>
                </div>

@@ -17,7 +17,7 @@ class UserController extends Controller
     public function riwayat()
     {
         $user = User::find(Auth::user()->id);
-        $data = Pengaduan::where('user_id', $user->id)->paginate(3);
+        $data = Pengaduan::where('user_id', $user->id)->latest()->paginate(3);
         return view('riwayat',['user' => $user], compact('data'));
     }
 
