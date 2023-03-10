@@ -68,11 +68,17 @@
               <span class="menu-title">Pengaduan</span>
             </a>
           </li>
-          @if ($auth = Auth::guard('admin')->user()->role == 1)              
+          @if ($auth = Auth::guard('admin')->user()->role == 1)   
           <li class="nav-item">
-            <a class="nav-link" href="">
-              <i class="icon-grid menu-icon"></i>
-              <span class="menu-title">User</span>
+            <a class="nav-link" href="{{route('petugas.index')}}" style="display: flex; gap: 20px;">
+              <i class="mdi mdi-account"></i>
+              <span class="menu-title">Petugas</span>
+            </a>
+          </li>           
+          <li class="nav-item">
+            <a class="nav-link" href="{{route('masyarakat.index')}}" style="display: flex; gap: 20px;">
+              <i class="mdi mdi-account-multiple"></i>
+              <span class="menu-title">Masyarkat</span>
             </a>
           </li>
           @endif

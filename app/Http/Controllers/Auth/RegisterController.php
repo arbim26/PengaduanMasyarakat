@@ -88,11 +88,12 @@ class RegisterController extends Controller
 
     protected function createAdmin(Request $request)
     {
+        // dd($request);
         $this->validator($request->all())->validate();
         $admin = Admin::create([
             'name' => $request['name'],
             'email' => $request['email'],
-            'role' => 2,
+            'role' => $request['role'],
             'password' =>  bcrypt($request['password']),
         ]);
         return redirect()->intended('admin');

@@ -2,15 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
-use App\Models\Pengaduan;
-use App\Models\Tanggapan;
+use App\Models\Admin;
 use Illuminate\Http\Request;
-use Illuminate\Support\Carbon;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
 
-class PengaduanController extends Controller
+class PetugasController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,42 +15,8 @@ class PengaduanController extends Controller
      */
     public function index()
     {
-        $data = Pengaduan::latest()->get();
-        return view('admin.pengaduan.index', compact('data'));
-    }
-
-    public function verifikasi($id)
-    {
-        $data = Pengaduan::find($id);
-        $data->update(['status' => 'proses']);
-        return redirect()->back()->with(['success' => 'Data berhasil di verifikasi!']);
-    }
-
-    public function tanggapan(request $request, $id)
-    {
-        $this->validate($request, [
-            'tanggapan'   => 'required',
-        ]);
-        
-        $user = Auth::guard('admin')->user()->id;
-        $date = Carbon::now();
-        $today = $date->format('Y-m-d');
-
-        $data = Tanggapan::create([
-            'id_pengaduan'     => $id,
-            'id_admin'         => $user,
-            'tgl_tanggapan'    => $date,
-            'tanggapan'        => $request->tanggapan,
-        ]);
-
-        $pengaduan = Pengaduan::find($id);
-        $pengaduan -> update(['status' => 'selesai']);
-
-        if($data){
-            return redirect()->back()->with(['success' => 'Pengaduan Berhasil Disimpan!']);
-        }else{
-            return redirect()->back()->with(['error' => 'Pengaduan Gagal Disimpan!']);
-        }  
+        $data = Admin::get();
+        return view('Admin.petugas.index', compact('data'));
     }
 
     /**
@@ -123,4 +85,3 @@ class PengaduanController extends Controller
         //
     }
 }
-?>

@@ -15,8 +15,11 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\PetugasController;
 use App\Http\Controllers\PengaduanController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\MasyarakatController;
 use App\Http\Controllers\Auth\RegisterController;
 
 Route::get('/', function () {
@@ -36,8 +39,12 @@ Route::post('/admin/login',[LoginController::class,'adminLogin'])->name('admin.l
 Route::post('/admin/register',[RegisterController::class,'createAdmin'])->name('admin.register');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+
 Route::get('/admin/dashboard',function(){ return view('admin.admin'); })->middleware('auth:admin');
+Route::resource('masyarakat', MasyarakatController::class)->middleware('auth:admin');
 Route::resource('pengaduan', PengaduanController::class)->middleware('auth:admin');
+Route::resource('petugas', PetugasController::class)->middleware('auth:admin');
 Route::put('/verifikasi/{id}', [PengaduanController::class, 'verifikasi'])->middleware('auth:admin');
 Route::put('/tanggapan/{id}', [PengaduanController::class, 'tanggapan'])->middleware('auth:admin');
+
 ?>

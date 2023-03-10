@@ -21,7 +21,7 @@
       <div class="col">
         <div class="row align-items-center">
           <div class="col-md-6">
-            <h4 class="mb-1">{{$row->user->name}}</h4>
+            <h4 class="mb-1">{{$row->user->name}} ({{$row->user->nik}})</h4>
             <div class="d-flex" style="gap: 10px">
               <div>
                 <label class="badge <?php if  ($row->status == 'menunggu verifikasi'){ ?> badge-info <?php   } ?> <?php if ($row->status == 'proses'){ ?> badge-warning <?php   } ?>  <?php if ($row->status == 'selesai'){ ?> badge-success <?php   } ?> ">{{ $row->status }}</label>
@@ -71,7 +71,6 @@
              
              <!-- Modal -->
              <form action="/tanggapan/{{$row->id}}"  method="POST">
-              {{-- {{dd($row->id)}} --}}
               @method("PUT")
               @csrf
                <div class="modal fade" id="exampleModals{{$row->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -108,11 +107,10 @@
                    </div>
                    <div class="modal-body">
                     <h6>Isi Laporan :</h6>
-                    <p>{{$row->id}}</p>
                     <p>{{$row->isi_laporan}}</p>
                     <h6>Isi Tanggapan :</h6>
                     @if ($row->tanggapan)
-                    <p class="small mb-0 text-muted">{{Str::limit($row->tanggapan->tanggapan,175)}}</p>
+                    <p>{{Str::limit($row->tanggapan->tanggapan,175)}}</p>
                     @else
                     <div class="alert alert-danger" role="alert">
                       Belum Di Tanggapi
