@@ -7,6 +7,7 @@ use App\Models\Pengaduan;
 use App\Models\Tanggapan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use Barryvdh\DomPDF\Facade\Pdf;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
@@ -57,6 +58,25 @@ class PengaduanController extends Controller
         }  
     }
 
+    public function filter_tanggal(Request $request)
+    {
+        $from = $request->from . ' ' . '00:00:00';
+        $to = $request->to . ' ' . '23:59:59';
+        
+        $data = Pengaduan::whereBetween('tgl_pengaduan', [$from, $to])->get();
+        // dd($data);
+
+        return view('admin.pengaduan.filter', ['data' => $data, 'from' => $from, 'to' => $to]);
+    }
+
+    public function print(Request $request, $from, $to)
+    {
+        $data = Pengaduan::whereBetween('tgl_pengaduan', [$from, $to])->get();
+
+        $pdf = PDF::loadView('print', ['data' => $data, 'request' =>  $request]);
+      
+        return $pdf->stream();
+    }
     /**
      * Show the form for creating a new resource.
      *

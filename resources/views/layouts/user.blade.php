@@ -59,7 +59,7 @@
       <div class="wave wave3"></div>
       @yield('content')
 
-      <div class="container" style="width: 600px; color: #6096B4">
+      <div class="container" style="width: 600px; color: #6096B4; margin-top: 75px;">
         <h4 class="text-center">Tentang Ngadu</h4>
         <p class="mt-4" style="text-align: justify; color: #6096B4">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Scelerisque purus semper eget duis at tellus. Quis enim lobortis scelerisque fermentum dui faucibus in ornare quam. Sed sed risus pretium quam vulputate dignissim suspendisse in. Quisque non tellus orci ac auctor augue mauris. Aliquet risus feugiat in ante metus dictum at. Urna molestie at elementum eu facilisis sed odio morbi quis. Amet nisl suscipit adipiscing bibendum est ultricies integer. Sed risus pretium quam vulputate dignissim suspendisse. Sit amet consectetur adipiscing elit pellentesque.</p>
       </div>

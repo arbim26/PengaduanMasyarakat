@@ -24,6 +24,9 @@
       </div>
       <button type="submit" class="btn btn-primary">Submit</button>
     </form>
+    @if($data ?? '')
+    <a href="{{ route('print', ['from' => $from, 'to' => $to]) }}" class="btn btn-danger">EXPORT PDF</a>
+    @endif
   </div>
 </div>
 @foreach ( $data as $row ) 

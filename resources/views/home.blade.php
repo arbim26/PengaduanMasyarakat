@@ -1,7 +1,7 @@
 @extends('layouts.user')
 
 @section('content')  
-
+{{-- {{dd(Auth::check())}} --}}
 <div class="container" >
   <div class="d-flex justify-content-center  flex-column">
     <div class="card mt-5 p-2 ms-auto me-auto" style="width: 45rem; border-radius: 20px; box-shadow: 0px 5px 30px #3C4048;">

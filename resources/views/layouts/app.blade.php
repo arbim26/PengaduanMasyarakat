@@ -106,6 +106,7 @@
       </footer>
       <!-- partial -->
 </div>
+  @yield('js')
   <!-- plugins:js -->
   <script src="../../assets/vendors/js/vendor.bundle.base.js"></script>
   <!-- endinject -->

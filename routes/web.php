@@ -46,5 +46,7 @@ Route::resource('pengaduan', PengaduanController::class)->middleware('auth:admin
 Route::resource('petugas', PetugasController::class)->middleware('auth:admin');
 Route::put('/verifikasi/{id}', [PengaduanController::class, 'verifikasi'])->middleware('auth:admin');
 Route::put('/tanggapan/{id}', [PengaduanController::class, 'tanggapan'])->middleware('auth:admin');
+Route::post('/filter',[PengaduanController::class,'filter_tanggal'])->name('filter');
+Route::get('/print/{from}/{to}',[PengaduanController::class,'print'])->name('print');
 
 ?>

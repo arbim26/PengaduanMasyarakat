@@ -17,7 +17,7 @@
                 <div class="card-body">
                     <div class="d-flex gap-3 mb-2">
                         <h6 class="cart-tittle text-secondary">{{ $row->tgl_pengaduan }}</h6>
-                        <span class="badge bg-warning">{{ $row->status }}</span>
+                        <span class="badge <?php if  ($row->status == 'menunggu verifikasi'){ ?> bg-info <?php   } ?> <?php if ($row->status == 'proses'){ ?> bg-warning <?php   } ?>  <?php if ($row->status == 'selesai'){ ?> bg-success <?php   } ?>">{{ $row->status }}</span>
                     </div>
                     <p class="card-text" style="font-size: 12px">{{ Str::limit($row->isi_laporan,300) }}</p>
                     <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal{{$row->id}}" style="background-color: #6096B4; color: white">detail</button>
@@ -38,7 +38,13 @@
                   <h6>Isi Laporan Anda :</h6>
                   <p>{{$row->isi_laporan}}</p>
                   <h6>Isi Tanggapan :</h6>
-                  <p></p>
+                  @if ($row->tanggapan)
+                  <p>{{$row->tanggapan->tanggapan}}</p>
+                  @else
+                  <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    Data belum ada tanggapan
+                  </div>
+                  @endif
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -51,33 +57,5 @@
         </div>  
       </div>  
   
-      <div class="process-wrap active-step1">
-        <div class="process-main">
-          <div class="col-3 ">
-            <div class="process-step-cont">
-              <div class="process-step step-1"></div>
-              <span class="process-label">Step 1</span>
-            </div>
-          </div>
-          <div class="col-3 ">
-            <div class="process-step-cont">
-              <div class="process-step step-2"></div>
-              <span class="process-label">Step 2</span>
-            </div>
-          </div>
-          <div class="col-3">
-            <div class="process-step-cont">
-              <div class="process-step step-3"></div>
-              <span class="process-label">Step 3</span>
-            </div>
-          </div>
-          <div class="col-3">
-            <div class="process-step-cont">
-              <div class="process-step step-4"></div>
-              <span class="process-label">Step 4</span>
-            </div>
-          </div>
-        </div>
-      </div>
   </div>
 @endsection
