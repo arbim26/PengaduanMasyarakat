@@ -1,58 +1,72 @@
 @extends('layouts.auth')
 
 @section('content')
-<div class="container-fluid page-body-wrapper full-page-wrapper">
-    <div class="content-wrapper d-flex align-items-center auth px-0">
-      <div class="row w-100 mx-0 ">
-        <div class="col-lg-4 mx-auto shadow">
-          <div class="auth-form-light text-left py-5 px-4 px-sm-5">
-            <div class="brand-logo text-center">
-              <img src="../../assets/images/logongadu.png" style="width: 100px;" alt="logo">
-            </div>
-            <h4>Selamat Datang!</h4>
-            <h6 class="font-weight-light">Masuk Untuk Melanjukan</h6>
-            <form method="POST" action="{{ route('admin.login') }}">
-                @csrf
-                <div class="form-group">
-                    <input style="border-radius: 10px" id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus placeholder="email">
-
-                    @error('email')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
-                </div>
-
-                <div class="form-group">
-                    <input style="border-radius: 10px" id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password" placeholder="password">
-
-                    @error('password')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
-                </div>
-
-                <div class="row mb-3 offset-md-1">
-                        <div class="form-check-label text-muted">
-                            <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-
-                            <label class="form-check-label" for="remember">
-                                {{ __('Remember Me') }}
-                            </label>
-                        </div>
-                </div>
-
-                <div class="row ">
-                    <button type="submit" class="w-100 btn" style="background-color: #6096B4; color: white;">
-                        {{ __('Login') }}
-                    </button>
-                </div>
-            </form>
+<div class="container-xxl">
+  <div class="authentication-wrapper authentication-basic container-p-y">
+    <div class="authentication-inner">
+      <!-- Register -->
+      <div class="card">
+        <div class="card-body">
+          <!-- Logo -->
+          <div class="app-brand justify-content-center">
+            <img src="../../assets_user/images/logo1(1).png" width="80px" alt="">
           </div>
+          <!-- /Logo -->
+          <h4 class="mb-2">Selamat Datang!</h4>
+          <p class="mb-4">Masuk untuk melanjutkan</p>
+
+          <form id="formAuthentication" class="mb-3" action="{{ route('admin.login') }}" method="POST">
+            @csrf
+            <div class="mb-3">
+              <label for="email" class="form-label" >Email or Username</label>
+              <input
+                type="text"
+                id="email"
+                placeholder="Enter your email or username"
+                autofocus
+                class="form-control @error('email') is-invalid @enderror" name="email"
+              />
+
+              @error('email')
+                  <span class="invalid-feedback" role="alert">
+                      <strong>{{ $message }}</strong>
+                  </span>
+              @enderror
+            </div>
+            <div class="mb-3 form-password-toggle">
+              <div class="d-flex justify-content-between">
+                <label class="form-label" for="password">Password</label>
+              </div>
+              <div class="input-group input-group-merge">
+                <input
+                  type="password"
+                  id="password"
+                  placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
+                  aria-describedby="password"
+                  class="form-control @error('password') is-invalid @enderror" name="password"
+                />
+                <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
+              </div>
+            </div>
+            <div class="mb-3">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
+
+                <label class="form-check-label" for="remember">
+                    {{ __('Remember Me') }}
+                </label>
+              </div>
+            </div>
+            <div class="mb-3">
+              <button class="btn btn-primary d-grid w-100" type="submit">Sign in</button>
+            </div>
+          </form>
+
         </div>
       </div>
+      <!-- /Register -->
     </div>
-    <!-- content-wrapper ends -->
   </div>
+</div>
+
 @endsection

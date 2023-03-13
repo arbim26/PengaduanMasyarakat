@@ -4,9 +4,9 @@
 {{-- {{dd(Auth::check())}} --}}
 <div class="container" >
   <div class="d-flex justify-content-center  flex-column">
-    <div class="card mt-5 p-2 ms-auto me-auto" style="width: 45rem; border-radius: 20px; box-shadow: 0px 5px 30px #3C4048;">
+    <div class="card p-2 ms-auto me-auto" style="width: 45rem; border-radius: 20px; box-shadow: 0px 5px 30px #3C4048;">
       <div class="card-body">
-        <h5 class="card-title text-center" style="color: #6096B4;">Masukkan Pengaduan Mu</h5>
+        <h5 class="card-title text-center text-primary" >Masukkan Pengaduan Mu</h5>
         <form action="{{ route('user.store') }}" class="mt-4" method="POST" enctype="multipart/form-data">
           @csrf
           <div class="container">
@@ -16,11 +16,11 @@
                   <textarea class="form-control" placeholder="Masukkan Keluh Kesah Mu Di Sini" style="border-radius: 10px" id="exampleFormControlTextarea1" name="laporan" rows="3"></textarea>
                 </div>
                 <div class="form-group">
-                  <div class="image-upload">
+                  <div class="image-upload"> 
                     <input type="file" name="image" id="logo" onchange="fileValue(this)" >
                     <label for="logo" class="upload-field" id="file-label">
                         <div class="file-thumbnail">
-                            <img id="image-preview" src="https://www.btklsby.go.id/images/placeholder/basic.png" alt="">
+                            <img id="image-preview" src="https://www.btklsby.go.id/images/placeholder/basic.png" alt="" style="height: 60px">
                             <h3 id="filename" class="mt-2">
                                 Upload Bukti Laporan
                             </h3>
@@ -33,7 +33,7 @@
       
             <div class="row mt-3">
               <div class="col-md-12">
-                <button type="submit" class="btn pull-right" style="background-color: #6096B4; color: white;">Upload</button>
+                <button type="submit" class="btn pull-right primary">Upload</button>
               </div>
             </div>
           </div>
@@ -42,34 +42,6 @@
     </div>  
     </div>  
 
-    <div class="process-wrap active-step1">
-      <div class="process-main">
-        <div class="col-3 ">
-          <div class="process-step-cont">
-            <div class="process-step step-1"></div>
-            <span class="process-label">Step 1</span>
-          </div>
-        </div>
-        <div class="col-3 ">
-          <div class="process-step-cont">
-            <div class="process-step step-2"></div>
-            <span class="process-label">Step 2</span>
-          </div>
-        </div>
-        <div class="col-3">
-          <div class="process-step-cont">
-            <div class="process-step step-3"></div>
-            <span class="process-label">Step 3</span>
-          </div>
-        </div>
-        <div class="col-3">
-          <div class="process-step-cont">
-            <div class="process-step step-4"></div>
-            <span class="process-label">Step 4</span>
-          </div>
-        </div>
-      </div>
-    </div>
 </div>
 
 <script>

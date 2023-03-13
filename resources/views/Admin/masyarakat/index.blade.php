@@ -62,10 +62,12 @@
                   <td>
                     <div class="d-flex" style="gap: 10px">
                       <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{ route('masyarakat.destroy', $row->id) }}" method="POST">
-                        <a type="button" class="" data-toggle="modal" data-target="#exampleModals{{$row->id}}"><i class="mdi mdi-pencil-box-outline" style="font-size: 25px;"></i></a >
+                        <a type="button" data-bs-toggle="modal" data-bs-target="#exampleModal{{$row->id}}">
+                          <i class="bi bi-pencil-square"></i>
+                        </a>
                         @csrf
                         @method('DELETE')
-                          <button type="submit" style="border: none; background-color: transparent"><i class="mdi mdi-delete text-danger "style="font-size: 25px;"></i></button>
+                          <button type="submit" style="border: none; background-color: transparent"><i class="bi bi-trash3"></i></button>
                       </form>
                     </div>
                   </td>
@@ -75,24 +77,23 @@
             <form action="{{ route('masyarakat.update', $row->id) }}" method="POST">  
               @method("PUT")
               @csrf
-               <div class="modal fade" id="exampleModals{{$row->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                 <div class="modal-dialog">
-                   <div class="modal-content">
-                     <div class="modal-header">
-                       <h5 class="modal-title" id="exampleModalLabel">Edit Masyarkat</h5>
-                       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                         <span aria-hidden="true">&times;</span>
-                       </button>
-                     </div>
-                     <div class="modal-body" style="border: none">
+              <div class="modal fade" id="exampleModal{{$row->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body" style="border: none">
                       <div class="form-group">
                         <label for="exampleInputEmail1">Nama</label>
                         <input type="text" name="name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="{{$row->name}}">
                       </div>      
                       <div class="form-group">
-                        <label for="exampleInputEmail1">NIK</label>
-                        <input type="text" name="nik" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="{{$row->nik}}">
-                      </div> 
+                        <label for="exampleInputEmail1">Nama</label>
+                        <input type="text" name="name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="{{$row->nik}}">
+                      </div>      
+
                       <div class="form-group">
                         <label for="exampleInputEmail1">Email</label>
                         <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="{{$row->email}}">
@@ -102,9 +103,9 @@
                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
                        <button type="submit" class="btn btn-primary">Simpan</button>
                      </div>
-                   </div>
-                 </div>
-               </div>
+                  </div>
+                </div>
+              </div>
              </form>
             @empty
             <div class="alert alert-danger" role="alert">

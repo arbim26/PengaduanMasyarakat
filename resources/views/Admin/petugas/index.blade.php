@@ -30,7 +30,7 @@
       <div class="card-body">
         <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px">
           <h4 class="card-title">Data Masyarakat</h4>
-          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModals">
             Tambah Admin
           </button>
         </div>
@@ -68,11 +68,13 @@
                   <td>
                     <div class="d-flex" style="gap: 10px">
                       <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{ route('masyarakat.destroy', $row->id) }}" method="POST">
-                        <a type="button" class="" data-toggle="modal" data-target="#exampleModals{{$row->id}}"><i class="mdi mdi-pencil-box-outline" style="font-size: 25px;"></i></a>
+                        <a type="button" data-bs-toggle="modal" data-bs-target="#exampleModal{{$row->id}}">
+                          <i class="bi bi-pencil-square"></i>
+                        </a>
                         @if ($row->name == "Admin")
                             
                         @else                            
-                        <button type="submit" style="border: none; background-color: transparent"><i class="mdi mdi-delete text-danger "style="font-size: 25px;"></i></button>
+                        <button type="submit" style="border: none; background-color: transparent"><i class="bi bi-trash3"></i></button>
                         @endif
                         @csrf
                         @method('DELETE')
@@ -81,59 +83,56 @@
                   </td>
                 </tr>
             </tbody>
+            <!-- Button trigger modal -->
 
             <!-- Modal -->
             <form action="{{route('admin.register')}}"  method="POST">
              @csrf
-              <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                  <div class="modal-content">
-                    <div class="modal-header" style="border: none">
-                      <h5 class="modal-title" id="exampleModalLabel">Isi Tanggapan</h5>
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                      </button>
+             <div class="modal fade" id="exampleModals" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body d-flex flex-column gap-3" style="border: none">
+                    <div class="form-group">
+                      <input type="text" name="name" class="form-control" id="exampleInputEmail1" placeholder="nama">
                     </div>
-                    <div class="modal-body" style="border: none">
-                      <div class="form-group">
-                        <input type="text" name="name" class="form-control" id="exampleInputEmail1" placeholder="nama">
-                      </div>
-                      <div class="form-group">
-                        <input type="email" name="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
-                      </div>  
-                      <div class="form-group">
-                        <select class="form-control" name="role" id="exampleFormControlSelect1">
-                          <option value="1">Admin</option>
-                          <option value="2">User</option>
-                        </select>
-                      </div>
-                      <div class="form-group">
-                        <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-                      </div>                 
+                    <div class="form-group">
+                      <input type="email" name="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+                    </div>  
+                    <div class="form-group">
+                      <select class="form-control" name="role" id="exampleFormControlSelect1">
+                        <option value="1">Admin</option>
+                        <option value="2">User</option>
+                      </select>
                     </div>
-                    <div class="modal-footer" style="border: none">
-                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                      <button type="submit" class="btn btn-primary">Simpan</button>
-                    </div>
+                    <div class="form-group">
+                      <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                    </div>                 
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
                   </div>
                 </div>
               </div>
+            </div>
             </form>
             <!-- Modal -->
 
             <form action="{{ route('masyarakat.update', $row->id) }}" method="POST">  
               @method("PUT")
               @csrf
-               <div class="modal fade" id="exampleModals{{$row->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                 <div class="modal-dialog">
-                   <div class="modal-content">
-                     <div class="modal-header">
-                       <h5 class="modal-title" id="exampleModalLabel">Edit Masyarkat</h5>
-                       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                         <span aria-hidden="true">&times;</span>
-                       </button>
-                     </div>
-                     <div class="modal-body" style="border: none">
+              <div class="modal fade" id="exampleModal{{$row->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body" style="border: none">
                       <div class="form-group">
                         <label for="exampleInputEmail1">Nama</label>
                         <input type="text" name="name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="{{$row->name}}">
@@ -154,9 +153,9 @@
                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
                        <button type="submit" class="btn btn-primary">Simpan</button>
                      </div>
-                   </div>
-                 </div>
-               </div>
+                  </div>
+                </div>
+              </div>
              </form>
             @empty
             <div class="alert alert-danger" role="alert">
